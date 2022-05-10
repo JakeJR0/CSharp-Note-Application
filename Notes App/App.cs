@@ -99,5 +99,52 @@ namespace Notes_App
                 NoteInput.Font = FontSelector.Font;
             }
         }
+
+        private void Notes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (fileName == "" && NoteInput.Text.Length > 0)
+            {
+                DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    SaveFile();
+                } else
+                {
+                    if (result == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+            } else
+            {
+                if (fileName == "")
+                {
+                    return;
+                }
+
+                string savedData;
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    savedData = sr.ReadToEnd();
+                    sr.Close();
+                }
+
+                if (savedData != NoteInput.Text)
+                {
+                    DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
+                    if (result == DialogResult.Yes)
+                    {
+                        SaveFile(fileName);
+                    }
+                    else
+                    {
+                        if (result == DialogResult.Cancel)
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                }
+            } 
+        }
     }
 }

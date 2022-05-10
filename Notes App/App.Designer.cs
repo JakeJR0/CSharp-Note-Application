@@ -37,7 +37,11 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NoteInput = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.FileNameOutput = new System.Windows.Forms.Label();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FontSelector = new System.Windows.Forms.FontDialog();
+            this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,16 +63,18 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.formatToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(489, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(970, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
             this.openFileToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -111,21 +117,48 @@
             this.NoteInput.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.NoteInput.Location = new System.Drawing.Point(13, 63);
             this.NoteInput.Name = "NoteInput";
-            this.NoteInput.Size = new System.Drawing.Size(464, 377);
+            this.NoteInput.Size = new System.Drawing.Size(945, 443);
             this.NoteInput.TabIndex = 1;
             this.NoteInput.Text = "";
             // 
-            // richTextBox2
+            // FileNameOutput
             // 
-            this.richTextBox2.BackColor = System.Drawing.Color.DarkGray;
-            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.richTextBox2.Location = new System.Drawing.Point(13, 28);
-            this.richTextBox2.Multiline = false;
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(464, 29);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.FileNameOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.FileNameOutput.Location = new System.Drawing.Point(12, 28);
+            this.FileNameOutput.Name = "FileNameOutput";
+            this.FileNameOutput.Size = new System.Drawing.Size(946, 32);
+            this.FileNameOutput.TabIndex = 2;
+            this.FileNameOutput.Text = "Untitled";
+            this.FileNameOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Text = "New File";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // FontSelector
+            // 
+            this.FontSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.FontSelector.MaxSize = 72;
+            this.FontSelector.MinSize = 11;
+            this.FontSelector.ShowEffects = false;
+            // 
+            // formatToolStripMenuItem
+            // 
+            this.formatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fontToolStripMenuItem});
+            this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
+            this.formatToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.formatToolStripMenuItem.Text = "Format";
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // Notes
             // 
@@ -133,8 +166,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(489, 452);
-            this.Controls.Add(this.richTextBox2);
+            this.ClientSize = new System.Drawing.Size(970, 518);
+            this.Controls.Add(this.FileNameOutput);
             this.Controls.Add(this.NoteInput);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.Color.Cornsilk;
@@ -159,7 +192,11 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.RichTextBox NoteInput;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label FileNameOutput;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        private System.Windows.Forms.FontDialog FontSelector;
     }
 }
 

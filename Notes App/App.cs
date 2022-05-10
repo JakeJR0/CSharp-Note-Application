@@ -20,6 +20,14 @@ namespace Notes_App
             InitializeComponent();
         }
 
+        private void setFileName(string file)
+        {
+            fileName = file;
+            string fileNameOutput = Path.GetFileName(fileName);
+            FileNameOutput.Text = fileNameOutput;
+
+        }
+        
         private void SaveFile(string file= "")
         {
             if (file == "")
@@ -27,7 +35,7 @@ namespace Notes_App
                 if (SaveNote.ShowDialog() == DialogResult.OK)
                 {
                     file = SaveNote.FileName;
-                    fileName = SaveNote.FileName;
+                    setFileName(SaveNote.FileName);
                 }
                 else
                 {
@@ -51,7 +59,7 @@ namespace Notes_App
                 {
                     string output = sr.ReadToEnd();
                     NoteInput.Text = output;
-                    fileName = NoteOpener.FileName;
+                    setFileName(NoteOpener.FileName);
                     sr.Close();
                 }
             }
@@ -75,6 +83,21 @@ namespace Notes_App
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fileName = "";
+            FileNameOutput.Text = "Untitled";
+            NoteInput.Text = "";
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FontSelector.ShowDialog() == DialogResult.OK)
+            {
+                NoteInput.Font = FontSelector.Font;
+            }
         }
     }
 }

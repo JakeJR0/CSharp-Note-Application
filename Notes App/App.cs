@@ -50,9 +50,56 @@ namespace Notes_App
             }
         }
 
+        private int requestedToSaveForNew()
+        {
+            /*
+             * 0: OK
+             * 1: NO
+             * 2: CANCEL
+            */
+            if (NoteInput.Text.Length > 0)
+            {
+                if (fileName == "")
+                {
+                    DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
+                    if (request == DialogResult.OK)
+                    {
+                        return 0;
+                    } else if (request == DialogResult.Cancel)
+                    {
+                        return 2;
+                    }
+                } else
+                {
+                    string FileText;
+                    using (StreamReader sw = new StreamReader(fileName))
+                    {
+                        FileText = sw.ReadToEnd();
+                        sw.Close();
+                    }
+
+                    if (FileText != NoteInput.Text)
+                    {
+                        DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
+                        if (request == DialogResult.OK)
+                        {
+                            return 0;
+                        } else if (request == DialogResult.Cancel)
+                        {
+                            return 2;
+                        }
+                    } else
+                    {
+                        return 1;
+                    }
+                }
+            }
+
+            return 1;
+        }
+
         private void OpenFile()
         {
-            
             if (NoteOpener.ShowDialog() == DialogResult.OK)
             {
                 using (StreamReader sr = new StreamReader(NoteOpener.FileName))
@@ -87,9 +134,32 @@ namespace Notes_App
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fileName = "";
-            FileNameOutput.Text = "Untitled";
-            NoteInput.Text = "";
+            int userRequestFileSave = requestedToSaveForNew();
+
+            switch (userRequestFileSave)
+            {
+                case 0:
+                    {
+                        SaveFile(fileName);
+                        fileName = "";
+                        FileNameOutput.Text = "Untitled";
+                        NoteInput.Text = "";
+                        break;
+                    }
+                case 1:
+                    {
+                        fileName = "";
+                        FileNameOutput.Text = "Untitled";
+                        NoteInput.Text = "";
+                        break;
+                    }
+                case 2:
+                    {
+                        break;
+                    }
+            }
+
+            
         }
 
         private void fontToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,5 +216,6 @@ namespace Notes_App
                 }
             } 
         }
+
     }
 }

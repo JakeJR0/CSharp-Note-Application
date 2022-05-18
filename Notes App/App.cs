@@ -52,11 +52,13 @@ namespace Notes_App
 
         private int requestedToSaveForNew()
         {
+
             /*
              * 0: OK
              * 1: NO
              * 2: CANCEL
             */
+
             if (NoteInput.Text.Length > 0)
             {
                 if (fileName == "")

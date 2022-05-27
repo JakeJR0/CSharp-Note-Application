@@ -1,7 +1,7 @@
 # Notes Application in C#
 
 ## UI Preview
-![UI Preview](https://github.com/JakeJR0/CSharp-Rock-Paper-Scissors-Game/blob/master/Rock%20Paper%20Scissors/images/UI_View.PNG?raw=true)
+![UI Preview](https://github.com/JakeJR0/CSharp-Note-Application/blob/master/Notes%20App/images/UI_View.PNG)
 
 ## Project Plan
 - User will be able to write text into the application.

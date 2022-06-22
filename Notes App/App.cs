@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Notes_App;
 
 namespace Notes_App
 {
     public partial class Notes : Form
     {
         string fileName = "";
+        PageControl PageController;
         
         public Notes()
         {
@@ -24,8 +26,7 @@ namespace Notes_App
         {
             fileName = file;
             string fileNameOutput = Path.GetFileName(fileName);
-            FileNameOutput.Text = fileNameOutput;
-
+            this.Text = $"Sharp Notes ({fileNameOutput})";
         }
         
         private void SaveFile(string file= "")
@@ -144,14 +145,14 @@ namespace Notes_App
                     {
                         SaveFile(fileName);
                         fileName = "";
-                        FileNameOutput.Text = "Untitled";
+                        this.Text = "Sharp Notes (Untitled)";
                         NoteInput.Text = "";
                         break;
                     }
                 case 1:
                     {
                         fileName = "";
-                        FileNameOutput.Text = "Untitled";
+                        this.Text = "Sharp Notes (Untitled)";
                         NoteInput.Text = "";
                         break;
                     }
@@ -162,14 +163,6 @@ namespace Notes_App
             }
 
             
-        }
-
-        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (FontSelector.ShowDialog() == DialogResult.OK)
-            {
-                NoteInput.Font = FontSelector.Font;
-            }
         }
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
@@ -219,5 +212,47 @@ namespace Notes_App
             } 
         }
 
+        private void Notes_Load(object sender, EventArgs e)
+        {
+            this.Text = "Sharp Notes (Untitled)";
+            PageController = new PageControl();
+            PageController.Add(MainPage); // Adds the Main Page to the controller.
+            PageController.Add(Settings); // Adds the settings page to the controller.
+            PageController.Display(MainPage); // Shows the main page.
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PageController.Display(Settings);
+        }
+
+        private void SettingsExit_Click(object sender, EventArgs e)
+        {
+            PageController.Display(MainPage);
+        }
+
+        private void setTransparency(double transparency)
+        {
+            this.Opacity = transparency;
+        }
+
+        private void setTransparency()
+        {
+            setTransparency(1);
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            double TransparencyValue = ((double)TransparencyBar.Value)/10;
+            setTransparency(TransparencyValue);
+        }
+
+        private void fontToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (FontSelector.ShowDialog() == DialogResult.OK)
+            {
+                NoteInput.Font = FontSelector.Font;
+            }
+        }
     }
 }

@@ -60,14 +60,14 @@ namespace Notes_App
              * 2: CANCEL
             */
 
-            if (NoteInput.Text.Length > 0)
+            if (NoteInput.Text.Length > 0) // Checks if the user has typed anything into the text box.
             {
-                if (fileName == "")
+                if (fileName == "") // Checks if the file has a name (if it has been assigned when the user opens or saves a file)
                 {
-                    DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
+                    DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel); // Asks the user if they wish to save.
                     if (request == DialogResult.OK)
                     {
-                        return 0;
+                        return 0; 
                     } else if (request == DialogResult.Cancel)
                     {
                         return 2;
@@ -117,29 +117,29 @@ namespace Notes_App
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFile();
+            OpenFile(); // Runs the open file function.
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFile();
+            SaveFile(); // Runs the save file function.
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFile(fileName);
+            SaveFile(fileName); // Runs the save file function.
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            Close(); // Closes the application.
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int userRequestFileSave = requestedToSaveForNew();
 
-            switch (userRequestFileSave)
+            switch (userRequestFileSave) 
             {
                 case 0:
                     {
@@ -254,5 +254,7 @@ namespace Notes_App
                 NoteInput.Font = FontSelector.Font;
             }
         }
+
+        
     }
 }

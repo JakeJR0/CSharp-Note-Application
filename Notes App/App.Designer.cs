@@ -208,7 +208,7 @@
             this.TransparencyLabel.Size = new System.Drawing.Size(213, 45);
             this.TransparencyLabel.TabIndex = 2;
             this.TransparencyLabel.Text = "Editor Transparency:";
-            this.TransparencyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TransparencyLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // STitle
             // 

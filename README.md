@@ -20,7 +20,7 @@ The idea of this project is to allow me to both practice and expand my current k
 - The application should be easy to use.
 
 ## Application
-### UI
+### User Interface
 #### Main Preview
 ![Main Page Preview](https://github.com/JakeJR0/CSharp-Note-Application/blob/master/Notes%20App/images/Main_Page_View.PNG)
 

@@ -14,8 +14,8 @@ namespace Notes_App
 {
     public partial class Notes : Form
     {
-        string fileName = "";
-        PageControl PageController;
+        string fileName = ""; // Sets a default value to the fileName variable
+        PageControl PageController; // Initiates the variable
         
         public Notes()
         {
@@ -24,30 +24,30 @@ namespace Notes_App
 
         private void setFileName(string file)
         {
-            fileName = file;
-            string fileNameOutput = Path.GetFileName(fileName);
-            this.Text = $"Sharp Notes ({fileNameOutput})";
+            fileName = file; // Sets the variable to the filename
+            string fileNameOutput = Path.GetFileName(fileName); // Gets the full file name.
+            this.Text = $"Sharp Notes ({fileNameOutput})"; // Sets the title of the application
         }
         
         private void SaveFile(string file= "")
         {
-            if (file == "")
+            if (file == "") // Checks if a file has been selected already.
             {
-                if (SaveNote.ShowDialog() == DialogResult.OK)
+                if (SaveNote.ShowDialog() == DialogResult.OK) // Prompts the user to save the file
                 {
-                    file = SaveNote.FileName;
-                    setFileName(SaveNote.FileName);
+                    file = SaveNote.FileName; // Sets file name for future saves
+                    setFileName(SaveNote.FileName); // Sets the file name and modifys the title of the application
                 }
                 else
                 {
-                    return;
+                    return; 
                 }
             }
 
-            using (StreamWriter sw = new StreamWriter(file))
+            using (StreamWriter sw = new StreamWriter(file)) // Creates a file stream which is used to modify the file
             {
-                sw.Write(NoteInput.Text);
-                sw.Close();
+                sw.Write(NoteInput.Text); // Writes the changes to the file.
+                sw.Close(); // Closes the file.
             }
         }
 
@@ -215,7 +215,7 @@ namespace Notes_App
         private void Notes_Load(object sender, EventArgs e)
         {
             this.Text = "Sharp Notes (Untitled)";
-            PageController = new PageControl();
+            PageController = new PageControl(); // Creates a child instance of the PageControl class.
             PageController.Add(MainPage); // Adds the Main Page to the controller.
             PageController.Add(Settings); // Adds the settings page to the controller.
             PageController.Display(MainPage); // Shows the main page.
@@ -223,35 +223,55 @@ namespace Notes_App
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PageController.Display(Settings);
+            PageController.Display(Settings); // Displays the settings page
         }
 
         private void SettingsExit_Click(object sender, EventArgs e)
         {
-            PageController.Display(MainPage);
+            PageController.Display(MainPage); // Displays the main page as the user wishes to exit the settings.
         }
 
         private void setTransparency(double transparency)
         {
-            this.Opacity = transparency;
+            this.Opacity = transparency; // Sets the transparency of the application to the value
         }
 
-        private void setTransparency()
+        private void setTransparency() // Used to have a default so the function does not require parameters
         {
-            setTransparency(1);
+            setTransparency(1); // Sets the transparency to 100%
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            double TransparencyValue = ((double)TransparencyBar.Value)/10;
-            setTransparency(TransparencyValue);
+            /*
+             * Converts the value of the bar to a double and divides it by 10
+             * 
+             * Example:
+             * 
+             *  Transparency Value could equal 70 which is short for 70%
+             *  Since the form requires that the value is a decimal / double
+             *  the transparency value is converted into 0.7 which the form
+             *  can interpret.
+            */
+            
+            double TransparencyValue = ((double)TransparencyBar.Value)/10; 
+            
+            setTransparency(TransparencyValue); // Sets the transparency to the calculated value
         }
 
         private void fontToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if (FontSelector.ShowDialog() == DialogResult.OK)
+            /*
+             * The application opens the font selecter which allows the user to
+             * modify the size, style and font, once the user has finished the application
+             * checks if the user pressed ok which is used to confirm the changes,
+             * if the user just exits out of the popup, the application will not
+             * apply the changes that have been made.
+            */
+
+            if (FontSelector.ShowDialog() == DialogResult.OK) 
             {
-                NoteInput.Font = FontSelector.Font;
+                NoteInput.Font = FontSelector.Font; // Applys the desired changes to the NoteInput (TextBox).
             }
         }
 

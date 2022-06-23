@@ -137,20 +137,20 @@ namespace Notes_App
             Close(); // Closes the application.
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void newFile()
         {
 
-           /*
-            * Case Value Meaning:
-            * 
-            * 0: OK
-            * 1: NO
-            * 2: CANCEL
-            */
+            /*
+             * Case Value Meaning:
+             * 
+             * 0: OK
+             * 1: NO
+             * 2: CANCEL
+             */
 
-            int userRequestFileSave = requestedToSaveForNew();
+            int userRequestFileSave = requestedToSaveForNew(); // Checks if the user wishes to save the file
 
-            switch (userRequestFileSave) 
+            switch (userRequestFileSave)
             {
                 case 0:
                     {
@@ -158,7 +158,7 @@ namespace Notes_App
                         fileName = ""; // Sets file name to default
                         this.Text = "Sharp Notes (Untitled)"; // Resets application title
                         NoteInput.Text = ""; // Clears out any text in the NoteInput (TextBox)
-                        break; 
+                        break;
                     }
                 case 1:
                     {
@@ -172,8 +172,10 @@ namespace Notes_App
                         break;
                     }
             }
-
-            
+        }
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newFile(); // Opens a black file.
         }
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
@@ -286,5 +288,16 @@ namespace Notes_App
             }
         }
 
+        private void newWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string applicationName = Application.ExecutablePath; // Gets the exe file location which ran the current application
+            try
+            {
+                System.Diagnostics.Process.Start(applicationName); // Creates a process that runs the exe file.
+            } catch // Ensures that the program will not crash in the event something goes wrong.
+            {
+                MessageBox.Show("Failed to open a new window.", "Sharp Notes", MessageBoxButtons.OK); // Informs the user that it failed to make a new window.
+            }
+        }
     }
 }

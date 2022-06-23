@@ -55,6 +55,8 @@ namespace Notes_App
         {
 
             /*
+             * Return Value Meaning:
+             * 
              * 0: OK
              * 1: NO
              * 2: CANCEL
@@ -65,29 +67,29 @@ namespace Notes_App
                 if (fileName == "") // Checks if the file has a name (if it has been assigned when the user opens or saves a file)
                 {
                     DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel); // Asks the user if they wish to save.
-                    if (request == DialogResult.OK)
+                    if (request == DialogResult.OK) // Checks if the user said Ok to the prompt
                     {
                         return 0; 
-                    } else if (request == DialogResult.Cancel)
+                    } else if (request == DialogResult.Cancel) // Checks if the user said cancel
                     {
                         return 2;
                     }
                 } else
                 {
-                    string FileText;
-                    using (StreamReader sw = new StreamReader(fileName))
+                    string FileText; // Initiates the variable.
+                    using (StreamReader sr = new StreamReader(fileName)) // Opens a file stream in read mode.
                     {
-                        FileText = sw.ReadToEnd();
-                        sw.Close();
+                        FileText = sr.ReadToEnd(); // Sets file text to all text within the file
+                        sr.Close(); // Closes the file stream.
                     }
 
-                    if (FileText != NoteInput.Text)
+                    if (FileText != NoteInput.Text) // Checks if the textbox text is diffrent from the file text.
                     {
-                        DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
-                        if (request == DialogResult.OK)
+                        DialogResult request = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel); // Prompts the user to enquire if the application should save
+                        if (request == DialogResult.OK) // Checks if the user responded with ok
                         {
                             return 0;
-                        } else if (request == DialogResult.Cancel)
+                        } else if (request == DialogResult.Cancel) // Checks if the user responded with cancel
                         {
                             return 2;
                         }
@@ -103,14 +105,14 @@ namespace Notes_App
 
         private void OpenFile()
         {
-            if (NoteOpener.ShowDialog() == DialogResult.OK)
+            if (NoteOpener.ShowDialog() == DialogResult.OK) // Prompts the user to select a file to open
             {
-                using (StreamReader sr = new StreamReader(NoteOpener.FileName))
+                using (StreamReader sr = new StreamReader(NoteOpener.FileName)) // Opens a file stream in read mode
                 {
-                    string output = sr.ReadToEnd();
-                    NoteInput.Text = output;
-                    setFileName(NoteOpener.FileName);
-                    sr.Close();
+                    string output = sr.ReadToEnd(); // Sets output to all the file's text.
+                    NoteInput.Text = output; // Populates the NoteInput (TextBox) with the file text.
+                    setFileName(NoteOpener.FileName); // Sets the File as the application's file, this sets the title of the form.
+                    sr.Close(); // Closes the file stream
                 }
             }
         }
@@ -137,23 +139,32 @@ namespace Notes_App
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+           /*
+            * Case Value Meaning:
+            * 
+            * 0: OK
+            * 1: NO
+            * 2: CANCEL
+            */
+
             int userRequestFileSave = requestedToSaveForNew();
 
             switch (userRequestFileSave) 
             {
                 case 0:
                     {
-                        SaveFile(fileName);
-                        fileName = "";
-                        this.Text = "Sharp Notes (Untitled)";
-                        NoteInput.Text = "";
-                        break;
+                        SaveFile(fileName); // Saves the file
+                        fileName = ""; // Sets file name to default
+                        this.Text = "Sharp Notes (Untitled)"; // Resets application title
+                        NoteInput.Text = ""; // Clears out any text in the NoteInput (TextBox)
+                        break; 
                     }
                 case 1:
                     {
-                        fileName = "";
-                        this.Text = "Sharp Notes (Untitled)";
-                        NoteInput.Text = "";
+                        fileName = ""; // Sets file name to default
+                        this.Text = "Sharp Notes (Untitled)"; // Resets application title
+                        NoteInput.Text = ""; // Clears out any text in the NoteInput (TextBox)
                         break;
                     }
                 case 2:
@@ -167,45 +178,45 @@ namespace Notes_App
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (fileName == "" && NoteInput.Text.Length > 0)
+            if (fileName == "" && NoteInput.Text.Length > 0) // Checks if the user needs to save
             {
-                DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Yes)
+                DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel); // Prompts the user to ask if they want to save
+                if (result == DialogResult.Yes) // Checks if the user responded Yes
                 {
-                    SaveFile();
+                    SaveFile(); // Saves the file
                 } else
                 {
-                    if (result == DialogResult.Cancel)
+                    if (result == DialogResult.Cancel) // Checks if the user responded Cancel
                     {
-                        e.Cancel = true;
+                        e.Cancel = true; // Cancels the application closing request.
                     }
                 }
             } else
             {
-                if (fileName == "")
+                if (fileName == "") // Checks if the fileName is equal to default
                 {
                     return;
                 }
 
-                string savedData;
-                using (StreamReader sr = new StreamReader(fileName))
+                string savedData; // Initiates the variable
+                using (StreamReader sr = new StreamReader(fileName)) // Opens a file stream in read mode
                 {
-                    savedData = sr.ReadToEnd();
-                    sr.Close();
+                    savedData = sr.ReadToEnd(); // Sets savedData as the file's content.
+                    sr.Close(); // Closes the file stream
                 }
 
-                if (savedData != NoteInput.Text)
+                if (savedData != NoteInput.Text) // Checks if the user made any changes to the file
                 {
-                    DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel);
-                    if (result == DialogResult.Yes)
+                    DialogResult result = MessageBox.Show("Do you want to save your notes?", "Sharp Notes", MessageBoxButtons.YesNoCancel); // Prompts the user to ask if they wish to save.
+                    if (result == DialogResult.Yes) // Checks if the user responded yes
                     {
-                        SaveFile(fileName);
+                        SaveFile(fileName); // Saves the changes to the file
                     }
                     else
                     {
-                        if (result == DialogResult.Cancel)
+                        if (result == DialogResult.Cancel) // Checks if the user responded cancel
                         {
-                            e.Cancel = true;
+                            e.Cancel = true; // Cancels the application closing request.
                         }
                     }
                 }
@@ -214,7 +225,7 @@ namespace Notes_App
 
         private void Notes_Load(object sender, EventArgs e)
         {
-            this.Text = "Sharp Notes (Untitled)";
+            this.Text = "Sharp Notes (Untitled)"; // Sets the form application to default.
             PageController = new PageControl(); // Creates a child instance of the PageControl class.
             PageController.Add(MainPage); // Adds the Main Page to the controller.
             PageController.Add(Settings); // Adds the settings page to the controller.
@@ -275,6 +286,5 @@ namespace Notes_App
             }
         }
 
-        
     }
 }

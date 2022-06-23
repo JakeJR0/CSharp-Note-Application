@@ -39,16 +39,16 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontSelector = new System.Windows.Forms.FontDialog();
             this.MainPage = new System.Windows.Forms.Panel();
             this.NoteInput = new System.Windows.Forms.RichTextBox();
             this.Settings = new System.Windows.Forms.Panel();
+            this.TransparencyBar = new System.Windows.Forms.TrackBar();
             this.TransparencyLabel = new System.Windows.Forms.Label();
             this.STitle = new System.Windows.Forms.Label();
             this.SettingsExit = new System.Windows.Forms.Button();
-            this.TransparencyBar = new System.Windows.Forms.TrackBar();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.MainPage.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -141,10 +141,17 @@
             this.editorToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.editorToolStripMenuItem.Text = "Editor";
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(131, 24);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click_1);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(131, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -200,6 +207,20 @@
             this.Settings.Size = new System.Drawing.Size(946, 464);
             this.Settings.TabIndex = 3;
             // 
+            // TransparencyBar
+            // 
+            this.TransparencyBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TransparencyBar.Location = new System.Drawing.Point(225, 98);
+            this.TransparencyBar.Minimum = 3;
+            this.TransparencyBar.Name = "TransparencyBar";
+            this.TransparencyBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TransparencyBar.RightToLeftLayout = true;
+            this.TransparencyBar.Size = new System.Drawing.Size(718, 45);
+            this.TransparencyBar.TabIndex = 7;
+            this.TransparencyBar.Value = 10;
+            this.TransparencyBar.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
             // TransparencyLabel
             // 
             this.TransparencyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -220,7 +241,6 @@
             this.STitle.TabIndex = 1;
             this.STitle.Text = "Editor Settings";
             this.STitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // SettingsExit
             // 
             this.SettingsExit.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -232,27 +252,6 @@
             this.SettingsExit.Text = "X";
             this.SettingsExit.UseVisualStyleBackColor = true;
             this.SettingsExit.Click += new System.EventHandler(this.SettingsExit_Click);
-            // 
-            // TransparencyBar
-            // 
-            this.TransparencyBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TransparencyBar.Location = new System.Drawing.Point(225, 98);
-            this.TransparencyBar.Minimum = 3;
-            this.TransparencyBar.Name = "TransparencyBar";
-            this.TransparencyBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.TransparencyBar.RightToLeftLayout = true;
-            this.TransparencyBar.Size = new System.Drawing.Size(718, 45);
-            this.TransparencyBar.TabIndex = 7;
-            this.TransparencyBar.Value = 10;
-            this.TransparencyBar.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click_1);
             // 
             // Notes
             // 
